@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const Listing = require("./models/listing.js");
+const ejsMate = require("ejs-mate");
+
+app.engine("ejs", ejsMate);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -71,6 +74,11 @@ app.delete("/listings/:id", async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
+});
+
+// Root Route or Home Route
+app.get("/", (req, res) => {
+    res.send("This is Home Page of our website WanderLust.");
 });
 
 app.listen(8080, () => {

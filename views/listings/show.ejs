@@ -1,30 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
-<body>
-    <h2>Listing Details : </h2>
-    <ul>
-        <li>Title : <%= listing.title %></li>
-        <li>Description : <%= listing.description %></li>
-        <li>Price : &#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-        <li>Location : <%= listing.location %></li>
-        <li>Country : <%= listing.country %></li>
-    </ul>
+<% layout("/layouts/boilerplate") %>
 
-    <form method="GET" action="/listings/<%= listing._id %>/edit">
-        <button>Edit Listing</button>
-    </form>
-    <br>
-    <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button>Delete Listing</button>
-    </form>
-    <br>
-    <form method="get" action="/listings">
-        <button>Go Back to All Listings</button>
-    </form>
-</body>
-</html>
+<div class="row mt-4">
+    <div class="col-8 offset-2">
+        <h2><%= listing.title %></h2>
+    </div>
+    <div class="col-6 offset-2">
+        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="Listing-image">
+        <div class="card-body mt-3">
+            <h5 class="card-title mb-2">About this place : </h5>
+            <p class="card-text">
+                <%= listing.description %> <br>
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> per night <br>
+                <%= listing.location %> <br>
+                <%= listing.country %>
+            </p>
+        </div>
+
+        <div class="btns">
+        <form method="GET" action="/listings/<%= listing._id %>/edit">
+            <button class="btn btn-dark edit-btn mt-4">Edit</button>
+        </form>
+        <br>
+        <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
+            <button class="btn btn-dark mb-4">Delete</button>
+        </form>
+        </div>
+    </div>
+</div>
+
+    

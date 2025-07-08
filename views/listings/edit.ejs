@@ -4,38 +4,40 @@
     <div class="col-8 offset-1">
     <h2>Edit Listing</h2>
     <br>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+    <form method="POST" 
+    action="/listings/<%= listing._id %>?_method=PUT" 
+    novalidate class="needs-validation">
         <div class="mb-4">
             <label for="title" class="form-label">Enter Title : </label>
-            <input class="form-control" type="text" id="title" value="<%= listing.title %>" name="listing[title]">
+            <input required class="form-control" type="text" id="title" value="<%= listing.title %>" name="listing[title]">
         </div>
         
         <div class="mb-4">
             <label for="desc" class="form-label">Enter Description : </label>
-            <textarea class="form-control" id="desc" name="listing[description]"><%= listing.description %>"</textarea>
+            <textarea required class="form-control" id="desc" name="listing[description]"><%= listing.description %>"</textarea>
         </div>
         
         <div class="mb-4">
             <label for="image" class="form-label">Enter Image URL/Link : </label>
-            <input class="form-control" type="text" id="image" value="<%= listing.image.url %>" name="listing[image][url]">
+            <input required class="form-control" type="text" id="image" value="<%= listing.image.url %>" name="listing[image][url]">
         </div>
         
         <div class="row">
         <div class="mb-4 col-md-4">
             <label for="price" class="form-label">Enter Price : </label>
-            <input class="form-control" type="number" id="price" value="<%= listing.price %>" name="listing[price]">
+            <input required class="form-control" type="number" id="price" value="<%= listing.price %>" name="listing[price]">
     
         </div>
         
         <div class="mb-4 col-md-8">
             <label for="location" class="form-label">Enter Location : </label>
-            <input class="form-control" type="text" id="location" value="<%= listing.location %>" name="listing[location]">
+            <input required class="form-control" type="text" id="location" value="<%= listing.location %>" name="listing[location]">
         </div class="mb-4">
         </div>
         
         <div class="mb-4">
             <label for="country" class="form-label">Enter Country : </label>
-            <input class="form-control" type="text" id="country" value="<%= listing.country %>" name="listing[country]">
+            <input required class="form-control" type="text" id="country" value="<%= listing.country %>" name="listing[country]">
         </div>
         
         <button class="btn btn-dark edit-btn mt-4 mb-4">Edit</button>

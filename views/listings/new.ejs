@@ -1,33 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
+<% layout("layouts/boilerplate") %>
 <body>
-    <h2>Create New Listing</h2>
+    <div class="row">
+    <div class="col-8 offset-1">
+    <br>
+    <h2>Add New Listing</h2>
+    <br>
 
-    <form method="POST" action="/listings">
-        <label for="title">Enter Title : </label>
-        <input type="text" id="title" placeholder="Enter title" name="listing[title]">
+    <form method="POST" action="/listings" novalidate class="needs-validation">
+        <div class="mb-4">
+            <label for="title" class="form-label">Enter Title : </label>
+            <input type="text" id="title" 
+            placeholder="Enter title" 
+            name="listing[title]" 
+            class="form-control" required>
+            <div class="invalid-feedback">
+                Please enter a title
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <label for="desc" class="form-label">Enter Description : </label>
+            <textarea class="form-control" 
+            id="desc" name="listing[description]" 
+            placeholder="Enter description" required></textarea>
+            <div class="invalid-feedback">
+                Please enter a short description
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <label for="image" class="form-label">Enter Image URL/Link : </label>
+            <input class="form-control" 
+            type="text" id="image" 
+            placeholder="Enter image URL/Link" 
+            name="listing[image]">
+        </div>
+        
+        <div class="row">
+            <div class="mb-4 col-md-4">
+            <label for="price" class="form-label">Enter Price : </label>
+            <input class="form-control" 
+            type="number" id="price" 
+            placeholder="Enter price" 
+            name="listing[price]" required>
+            <div class="invalid-feedback">
+                Price should be valid
+            </div>
+            </div>
+        
+            <div class="mb-4 col-md-8">
+            <label for="location" class="form-label">Enter Location : </label>
+            <input class="form-control" 
+            type="text" id="location" 
+            placeholder="Enter location" 
+            name="listing[location]" required>
+            <div class="invalid-feedback">
+                Location should be valid
+            </div>
+            </div>
+        </div>
+        
+        
+        <div class="mb-4">
+            <label for="country" class="form-label">Enter Country : </label>
+            <input class="form-control" 
+            type="text" id="country" 
+            placeholder="Enter country" 
+            name="listing[country]" required>
+            <div class="invalid-feedback">
+                Country should be valid
+            </div>
+        </div>
+    
+        <button class="btn btn-dark add-btn">ADD</button>
         <br><br>
-        <label for="desc">Enter Description : </label>
-        <textarea  id="desc" name="listing[description]" placeholder="Enter description"></textarea>
-        <br><br>
-        <label for="image">Enter Image URL/Link : </label>
-        <input type="text" id="image" placeholder="Enter image URL/Link" name="listing[image]">
-        <br><br>
-        <label for="price">Enter Price : </label>
-        <input type="number" id="price" placeholder="Enter price" name="listing[price]">
-        <br><br>
-        <label for="location">Enter Location : </label>
-        <input type="text" id="location" placeholder="Enter location" name="listing[location]">
-        <br><br>
-        <label for="country">Enter Country : </label>
-        <input type="text" id="country" placeholder="Enter country" name="listing[country]">
-        <br><br>
-        <button>Create</button>
     </form>
+    </div>
+    </div>
 </body>
-</html>

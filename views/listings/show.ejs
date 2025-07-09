@@ -1,30 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
-<body>
-    <h2>Listing Details : </h2>
-    <ul>
-        <li>Title : <%= listing.title %></li>
-        <li>Description : <%= listing.description %></li>
-        <li>Price : &#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-        <li>Location : <%= listing.location %></li>
-        <li>Country : <%= listing.country %></li>
-    </ul>
+<% layout("/layouts/boilerplate") %>
 
-    <form method="GET" action="/listings/<%= listing._id %>/edit">
-        <button>Edit Listing</button>
-    </form>
-    <br>
-    <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button>Delete Listing</button>
-    </form>
-    <br>
-    <form method="get" action="/listings">
-        <button>Go Back to All Listings</button>
-    </form>
-</body>
-</html>
+<div class="row mt-4">
+    <div class="col-8 offset-1">
+        <h2><%= listing.title %></h2>
+    </div>
+    <div class="col-8 offset-1">
+        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="Listing-image">
+        <div class="card-body mt-3">
+            <h5 class="card-title mb-2">About this place : </h5>
+            <p class="card-text">
+                <%= listing.description %> <br>
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> per night <br>
+                <%= listing.location %> <br>
+                <%= listing.country %>
+            </p>
+        </div>
+
+        <div class="btns">
+        <form method="GET" action="/listings/<%= listing._id %>/edit">
+            <button class="btn btn-dark edit-btn mt-4">Edit</button>
+        </form>
+        <br>
+        <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
+            <button class="btn btn-dark mb-4">Delete</button>
+        </form>
+        </div>
+
+        <div class="mb-3">
+            <hr>
+            <h4>Leave a Review</h4>
+            <form novalidate 
+            class="needs-validation"
+            method="post" 
+            action="/listings/<%= listing._id %>/reviews">
+                <div class="mb-3 mt-3">
+                    <label for="rating" class="form-label">Rating : </label>
+                    <input class="form-range" type="range" min="1" max="5" step="1" id="rating" name="review[rating]">
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="comment" class="form-label">Comment : </label>
+                    <textarea required name="review[comment]" 
+                    class="form-control"
+                    id="comment" 
+                    rows="5" 
+                    cols="30"></textarea>
+                    <div class="invalid-feedback">
+                        Please provide a comment.
+                    </div>
+                </div>
+                <button class="btn btn-outline-dark">Submit</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <h4>All Reviews</h4>
+        <div class="row">
+            <% for (review of listing.reviews) { %>
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-2">Rating: <span class="badge bg-warning text-dark"><%= review.rating %></span></h5>
+                            <p class="card-text"><strong>Comment:</strong> <%= review.comment %></p>
+                            <p class="card-text"><small class="text-muted">Posted on: <%= review.createdAt ? new Date(review.createdAt).toLocaleDateString() : '' %></small></p>
+                            <form class="mt-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                <button class="btn btn-sm btn-outline-dark">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
